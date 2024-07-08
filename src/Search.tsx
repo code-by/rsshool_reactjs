@@ -3,6 +3,8 @@ import { Component } from "react";
 type InputEvent = React.ChangeEvent<HTMLInputElement>;
 type ButtonEvent = React.MouseEvent<HTMLButtonElement>;
 
+const localStorageSearchTermKey = 'search_term';
+
 interface SearchState {
   searchTerm: string,
 }
@@ -14,9 +16,7 @@ class Search extends Component<Record<string, never>, SearchState> {
   };
 
   componentDidMount(): void {
-    // TODO:
-    // read searchTerm from localstorage
-    const searchTerm = "";
+    const searchTerm = localStorage.getItem(localStorageSearchTermKey) ?? "";
     this.setState({
       searchTerm
     });    
@@ -30,20 +30,18 @@ class Search extends Component<Record<string, never>, SearchState> {
 
   handleSearchClick = (e: ButtonEvent) : void => {
     const { searchTerm } = this.state;
-    // TODO:
-    // save searchTerm to localstorage
-    console.log(searchTerm);
+    localStorage.setItem(localStorageSearchTermKey, searchTerm);
     e.preventDefault();
   }
 
   render () {
     return (
       <>
-      <section>
-        <div>
-          <input type="text" value={this.state.searchTerm} onChange={this.handleSearchTermChange}/>
-          <button onClick={this.handleSearchClick}>Search</button>
-        </div>
+        <section>
+          <div>
+            <input type="text" value={this.state.searchTerm} onChange={this.handleSearchTermChange}/>
+            <button onClick={this.handleSearchClick}>Search</button>
+          </div>
         </section>
       </>
     )
