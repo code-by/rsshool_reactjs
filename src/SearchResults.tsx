@@ -14,8 +14,6 @@ interface SearchResultsProps {
 class SearchResults extends Component<SearchResultsProps> {
 
   render() {
-    console.log('SearchResults');
-    console.log(this.props);
     const { data } = this.props;
     return (
       <div className="searchresultscontainer">
