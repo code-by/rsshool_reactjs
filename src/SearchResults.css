@@ -1,0 +1,42 @@
+.searchresultscontainer {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  border-radius: 4px;
+  margin-top: 20px;
+  align-items: center;
+  justify-content: center;
+}
+
+.searchresultsheader {
+  display: flex;
+  width: 100%;
+  font-weight: bold;
+  background-color: #505050;
+  color: white;
+}
+
+.searchresultsrow {
+  display: flex;
+  width: 100%;
+}
+
+.searchresultsrow:nth-child(odd) {
+  background-color: rgb(216, 216, 216);
+}
+
+.searchresultsitem {
+  display: flex;
+  flex: 1;
+  width: 100%;
+  padding: 5px;
+  text-align: left;
+  border-right: 1px solid #0f0f0f;
+  align-items: left;
+}
+
+.searchresultsitem:last-child {
+  border-right: none;
+}

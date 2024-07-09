@@ -1,27 +1,32 @@
 import { Component } from "react";
+import SearchResults from "./SearchResults";
 
 type InputEvent = React.ChangeEvent<HTMLInputElement>;
 type ButtonEvent = React.MouseEvent<HTMLButtonElement>;
-type SearchResult = Record<string, string | number>[];
 
 const localStorageSearchTermKey = 'search_term';
 const searchAPI = `https://swapi.dev/api/starships?search=`;
 
-interface SearchState {
-  searchTerm: string,
-  searchResults: SearchResult,
-  loading: boolean,
+interface ISearchResults {
+  name: string,
+  model: string,
+};
+
+interface ISearchResult {
+  results: ISearchResults[]
 }
 
-interface SearchResults {
-  results: SearchResult,
+interface SearchState {
+  searchTerm: string,
+  searchResult: ISearchResults[],
+  loading: boolean,
 }
 
 class Search extends Component<Record<string, never>, SearchState> {
 
   state: SearchState = {
     searchTerm: "",
-    searchResults: [],
+    searchResult: [],
     loading: false,
   };
 
@@ -30,12 +35,9 @@ class Search extends Component<Record<string, never>, SearchState> {
       this.setState({ loading: true });
       const queryRequestURL = `${searchAPI}${searchTerm}`;
       const response = await fetch(queryRequestURL);
-      const data = await response.json() as SearchResults;
-      const searchResults : SearchResult = data.results;
-      // TODO:
-      // displaying results instead log to console
-      console.log(searchResults);
-      this.setState({ searchResults, loading: false });
+      const data = await response.json() as ISearchResult;
+      const searchResult : ISearchResults[] = data.results;
+      this.setState({ searchResult, loading: false });
     } catch (error) {
       console.error('Error fetching data:', error);
       this.setState({ loading: false });
@@ -68,16 +70,26 @@ class Search extends Component<Record<string, never>, SearchState> {
   }
 
   render () {
+    const { searchTerm, loading, searchResult } = this.state;
     return (
       <>
         <section>
           <h3>SWAPI</h3>
           <p>Please input search term for search in starships name or model, leaving blank empty will display first 10 results.</p>
           <div>
-            <input type="text" value={this.state.searchTerm} onChange={this.handleSearchTermChange}/>
+            <input type="text" value={searchTerm} onChange={this.handleSearchTermChange}/>
             <button onClick={this.handleSearchClick}>Search</button>
           </div>
           <p>Click Search button to confirm search</p>
+        </section>
+        <section>
+          {loading ? (
+            <h2>LOADING...</h2>
+          ) : (
+            <SearchResults
+              data={searchResult}
+            />
+          )}
         </section>
       </>
     )
