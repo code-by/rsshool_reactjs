@@ -45,6 +45,8 @@ button {
   background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
+  color: white;
+  margin-left: 10px;
 }
 button:hover {
   border-color: #646cff;
@@ -70,6 +72,20 @@ button:focus-visible {
 input {
   margin-right: 10px;
   height: 24pt;
-  width: 75%;
+  flex: 1;
+  max-width: 75%;
+  min-width: 50%;
   font-size: 0.9em;
+}
+
+button#buttonSearch {
+  background-color: #0000cc;
+}
+
+button#buttonThrowError {
+  background-color: #cc0000;
+}
+
+button#buttonResetError {
+  background-color: #009900;
 }
