@@ -62,10 +62,11 @@ class Search extends Component<Record<string, never>, SearchState> {
 
   handleSearchClick = (e: ButtonEvent): void => {
     const { searchTerm } = this.state;
-    localStorage.setItem(localStorageSearchTermKey, searchTerm);
+    const searchTermTrimmed = searchTerm.trim();
+    localStorage.setItem(localStorageSearchTermKey, searchTermTrimmed);
     e.preventDefault();
     (async () => {
-      await this.fetchData(searchTerm);
+      await this.fetchData(searchTermTrimmed);
     })().catch((err) => {
       console.error(err);
     });
