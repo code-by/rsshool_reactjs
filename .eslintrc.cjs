@@ -25,7 +25,8 @@ module.exports = {
   parser: "@typescript-eslint/parser",
   plugins: [
     "react-refresh",
-    "react-compiler"
+    "react-compiler",
+    '@typescript-eslint',
   ],
   rules: {
     "react-refresh/only-export-components": [
@@ -34,5 +35,11 @@ module.exports = {
     ],
     "@typescript-eslint/no-explicit-any": "error",
     "react-compiler/react-compiler": "error",
+    "@typescript-eslint/no-unused-vars": "error",
   },
+  settings: {
+    react: {
+      version: 'detect',
+    }
+  }
 };
