@@ -24,7 +24,6 @@ interface SearchState {
 }
 
 class Search extends Component<Record<string, never>, SearchState> {
-
   state: SearchState = {
     searchTerm: "",
     searchResult: [],
@@ -32,7 +31,7 @@ class Search extends Component<Record<string, never>, SearchState> {
     errorThrowed: false,
   };
 
-  fetchData = async (searchTerm: string) : Promise<void> => {
+  fetchData = async (searchTerm: string): Promise<void> => {
     try {
       this.setState({ loading: true });
       const queryRequestURL = `${searchAPI}${searchTerm}`;
@@ -72,18 +71,18 @@ class Search extends Component<Record<string, never>, SearchState> {
     });
   };
 
-  handleThrowErrorClick = (e: ButtonEvent) : void => {
-    console.log('handleThrowErrorClick');
+  handleThrowErrorClick = (e: ButtonEvent): void => {
+    console.log("handleThrowErrorClick");
     this.setState({
       errorThrowed: true,
     });
     e.preventDefault();
-  }
+  };
 
   render() {
     const { searchTerm, loading, searchResult, errorThrowed } = this.state;
     if (errorThrowed) {
-      throw new Error('Simulated error.');
+      throw new Error("Simulated error.");
     }
     return (
       <>
@@ -99,8 +98,12 @@ class Search extends Component<Record<string, never>, SearchState> {
               value={searchTerm}
               onChange={this.handleSearchTermChange}
             />
-            <button onClick={this.handleSearchClick} id="buttonSearch">Search</button>
-            <button onClick={this.handleThrowErrorClick} id="buttonThrowError">Throw Error</button>
+            <button onClick={this.handleSearchClick} id="buttonSearch">
+              Search
+            </button>
+            <button onClick={this.handleThrowErrorClick} id="buttonThrowError">
+              Throw Error
+            </button>
           </div>
           <p>Click Search button to confirm search</p>
         </section>

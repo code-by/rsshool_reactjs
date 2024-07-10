@@ -3,7 +3,7 @@ import { Component, ErrorInfo, ReactNode } from "react";
 interface Props {
   children?: ReactNode;
   fallback?: ReactNode;
-  resetThrowedError: (f: () => void) => void
+  resetThrowedError: (f: () => void) => void;
 }
 
 interface State {
@@ -11,14 +11,13 @@ interface State {
 }
 
 class ErrorBoundary extends Component<Props, State> {
-
   constructor(props: Props) {
     super(props);
     this.resetThrowedError = this.resetThrowedError.bind(this);
     this.state = {
       hasError: false,
-    }
- }
+    };
+  }
 
   public static getDerivedStateFromError(): State {
     return { hasError: true };
@@ -28,11 +27,11 @@ class ErrorBoundary extends Component<Props, State> {
     console.error("Error boundary catch Uncaught error:", error, errorInfo);
   }
 
-  resetThrowedError = () : void => {
+  resetThrowedError = (): void => {
     this.setState({
       hasError: false,
     });
-  }
+  };
 
   componentDidMount(): void {
     this.props.resetThrowedError(this.resetThrowedError);

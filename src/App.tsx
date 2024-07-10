@@ -5,20 +5,17 @@ import Search from "./Search";
 import AppFallback from "./AppFallback";
 
 class App extends Component {
-
-  clickChild!: (() => void);
+  clickChild!: () => void;
 
   handleResetError = () => {
     this.clickChild();
-  }
+  };
 
   render(): ReactNode {
     return (
-      <ErrorBoundary 
-        resetThrowedError={(click) => this.clickChild = click}
-        fallback={
-          <AppFallback handleResetError={this.handleResetError}/>
-        }
+      <ErrorBoundary
+        resetThrowedError={(click) => (this.clickChild = click)}
+        fallback={<AppFallback handleResetError={this.handleResetError} />}
       >
         <Search />
       </ErrorBoundary>
